@@ -1,0 +1,79 @@
+---
+swagger: '2.0'
+info:
+  title: Auth Service
+  description: this service enables authentication with multiple oAuth2 Provider like Google, Facebook, Twitter on-premise AD servers, etc.
+  version: 0.0.1
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /auth
+paths:
+  /providers:
+    get:
+      summary: returns a collection of all oAuth providers registered with the service
+      responses:
+        200:
+          description: successfully queried all providers
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/AuthProviderConfig" 
+  /providers/{id}/uri:
+    get:
+      summary: return the authorization code link, that the client should use to authenticate against the given oAuth provider.
+      parameters:
+        - name: id
+          in: path
+          description: the providers identifier code
+          required: true
+          type: string
+      responses:
+        200:
+          description: content contains the link
+          schema:
+            type: string
+            
+  /provider/{id}/callback:
+    post:
+      summary: this endpoint is used as the callback where the client will be redirected after authentication.
+      parameters:
+        - name: id
+          in: path
+          description: the providers identifier code
+          required: true
+          type: string
+        - name: code
+          in: query
+          description: the providers identifier code
+          required: true
+          type: string
+      responses:
+        200:
+          description: authentication with the provider was successfull
+          schema:
+            $ref: "#/definitions/AuthResponse"
+        403:
+          description: the authentication against the provider failed
+definitions:
+  AuthProviderConfig:
+    type: object
+    properties:
+      identifier:
+        type: string
+      displayName:
+        type: object
+      grantType:
+        type: string
+        enum:
+          - authorizationCode
+          - implicit
+          - resourceOwnerPasswordCredentials 
+          - clientCredentials
+      preferred:
+        type: boolean
+  AuthResponse:
+    type: object
+    properties:
+      token:
+        type: string

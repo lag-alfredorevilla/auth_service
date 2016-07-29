@@ -1,0 +1,16 @@
+[
+    {
+        "identifier":"google",
+        "displayName":{"de":"Google oAuth2-Anbieter", "en":"Google oAuth2 Provider"},
+        "grantType":"AuthorizationCode",
+        "authUri":"https://accounts.google.com/o/oauth2/v2/auth",
+        "preferred": true
+    },
+    {
+        "identifier":"facebook",
+        "displayName":{"de":"Facebook oAuth2-Anbieter", "en":"Facebook oAuth2 Provider"},
+        "grantType":"AuthorizationCode",
+        "authUri":"https://www.facebook.com/dialog/oauth?client_id={app-id}&redirect_uri={redirect-uri}",
+        "preferred": false
+    }
+]
