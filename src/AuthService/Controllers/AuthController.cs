@@ -46,12 +46,24 @@ namespace AuthService.Controllers
             var url = provider.AuthUrl
                 .Replace("{CLIENT_ID}", provider.ClientId)
                 .Replace("{SCOPE}", provider.Scope)
-                .Replace("{CALLBACK_URL}", $"https://localhost:8080/auth/{provider.Identifier}/callback");
+                .Replace("{CALLBACK_URL}", $"http://www.docugate.ch/auth/providers/{provider.Identifier}/callback");
 
             return new AuthRequest
             {
                 Url = url
             };
+        }
+
+
+        [HttpGet("providers/{id}/callback")]
+        public IActionResult ProcessAuthCallback(string id, [FromQuery] string code, [FromQuery] string error)
+        {
+            if(error != null)
+            {
+                return this.Unauthorized();
+            }
+
+            return Ok(new AuthResponse { Token = code });
         }
     }
 }

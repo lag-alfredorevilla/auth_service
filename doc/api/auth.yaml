@@ -53,7 +53,7 @@ paths:
           description: authentication with the provider was successfull
           schema:
             $ref: "#/definitions/AuthResponse"
-        403:
+        401:
           description: the authentication against the provider failed
 definitions:
   AuthProviderConfig:

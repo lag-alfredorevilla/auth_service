@@ -5,8 +5,9 @@
         "grantType":"AuthorizationCode",
         "authUrl":"https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id={CLIENT_ID}&redirect_uri={CALLBACK_URL}&scope={SCOPE}",
         "preferred": true,
-        "clientId":"testid",
-        "scope":"read"
+        "clientId":"820785417945-loijgk184ht55mi7mukj4i3mlu9burjs.apps.googleusercontent.com",
+        "clientSecret":"4FcOM1PzDVgCq67_LdSspZ8h",
+        "scope":"profile"
     },
     {
         "identifier":"facebook",
@@ -14,7 +15,8 @@
         "grantType":"AuthorizationCode",
         "authUrl":"https://www.facebook.com/dialog/oauth?client_id={CLIENT_ID}&redirect_uri={redirect-uri}",
         "preferred": false,
-        "clientId":"testid",
+        "clientId":"820785417945-loijgk184ht55mi7mukj4i3mlu9burjs.apps.googleusercontent.com",
+        "clientSecret":"4FcOM1PzDVgCq67_LdSspZ8h",
         "scope":"read"
     }
 ]

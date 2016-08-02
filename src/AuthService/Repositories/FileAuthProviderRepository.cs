@@ -30,6 +30,7 @@ namespace AuthService.Repositories
                     Preferred = x.Preferred,
                     AuthUrl = x.AuthUrl,
                     ClientId = x.ClientId,
+                    ClientSecret = x.ClientSecret,
                     Scope = x.Scope
                 }
             ).ToArray();
