@@ -28,7 +28,9 @@ namespace AuthService.Repositories
                     DisplayName = x.DisplayName,
                     GrantType = x.GrantType,
                     Preferred = x.Preferred,
-                    AuthUrl = x.AuthUrl
+                    AuthUrl = x.AuthUrl,
+                    ClientId = x.ClientId,
+                    Scope = x.Scope
                 }
             ).ToArray();
         }

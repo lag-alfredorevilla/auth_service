@@ -3,14 +3,18 @@
         "identifier":"google",
         "displayName":{"de":"Google oAuth2-Anbieter", "en":"Google oAuth2 Provider"},
         "grantType":"AuthorizationCode",
-        "authUri":"https://accounts.google.com/o/oauth2/v2/auth",
-        "preferred": true
+        "authUrl":"https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id={CLIENT_ID}&redirect_uri={CALLBACK_URL}&scope={SCOPE}",
+        "preferred": true,
+        "clientId":"testid",
+        "scope":"read"
     },
     {
         "identifier":"facebook",
         "displayName":{"de":"Facebook oAuth2-Anbieter", "en":"Facebook oAuth2 Provider"},
         "grantType":"AuthorizationCode",
-        "authUri":"https://www.facebook.com/dialog/oauth?client_id={app-id}&redirect_uri={redirect-uri}",
-        "preferred": false
+        "authUrl":"https://www.facebook.com/dialog/oauth?client_id={CLIENT_ID}&redirect_uri={redirect-uri}",
+        "preferred": false,
+        "clientId":"testid",
+        "scope":"read"
     }
 ]

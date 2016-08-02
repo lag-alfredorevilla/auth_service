@@ -13,5 +13,11 @@ namespace AuthService.Common.Models
         public string AuthUrl { get; set; }
 
         public bool Preferred { get; set; }
+
+        public string ClientId { get; set; }
+
+        public string ClientSecret { get; set; }
+
+        public string Scope { get; set; }
     }
 }

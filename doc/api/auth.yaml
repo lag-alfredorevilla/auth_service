@@ -19,7 +19,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/AuthProviderConfig" 
-  /providers/{id}/uri:
+  /providers/{id}/request:
     get:
       summary: return the authorization code link, that the client should use to authenticate against the given oAuth provider.
       parameters:
@@ -32,7 +32,7 @@ paths:
         200:
           description: content contains the link
           schema:
-            type: string
+            $ref: "#/definitions/AuthRequest"
             
   /provider/{id}/callback:
     post:
@@ -76,4 +76,9 @@ definitions:
     type: object
     properties:
       token:
+        type: string
+  AuthRequest:
+    type: object
+    properties:
+      url:
         type: string
