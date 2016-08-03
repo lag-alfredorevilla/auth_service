@@ -4,6 +4,7 @@
         "displayName":{"de":"Google oAuth2-Anbieter", "en":"Google oAuth2 Provider"},
         "grantType":"AuthorizationCode",
         "authUrl":"https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id={CLIENT_ID}&redirect_uri={CALLBACK_URL}&scope={SCOPE}",
+        "tokenUrl":"https://accounts.google.com/o/oauth2/v2/token?code={CODE}&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&redirect_uri={REDIRECT_URL}&grant_type=authorization_code",
         "preferred": true,
         "clientId":"820785417945-loijgk184ht55mi7mukj4i3mlu9burjs.apps.googleusercontent.com",
         "clientSecret":"4FcOM1PzDVgCq67_LdSspZ8h",

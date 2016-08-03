@@ -7,8 +7,16 @@ Standard service that handles authentication against oAuth services online.
 
 ## Running
 
-Important: set the necessary environment variables:
+**Important**: set the necessary environment variables:
 
-> $env:ASPNETCORE_ENVIRONMENT = "Production"
-> $env:ASPNETCORE_CONTENTROOT = "..\..\..\Resources\"
-
+For Powershell users:
+```
+$env:ASPNETCORE_ENVIRONMENT = "Production"
+$env:ASPNETCORE_CONTENTROOT = "..\..\..\Resources\"
+```
+For Bash users:
+```
+export ASPNETCORE_ENVIRONMENT="Production"
+export ASPNETCORE_CONTENTROOT="..\..\..\Resources\"
+```
+To get a more verbose log output use another environment like: `Development`

@@ -13,6 +13,8 @@ namespace AuthService.Repositories.Models
 
         public string AuthUrl { get; set; }
 
+        public string TokenUrl { get; set; }
+
         public bool Preferred { get; set; }
 
         public string ClientId { get; set; }

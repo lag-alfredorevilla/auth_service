@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using System.Metrics.Asp.Mvc.Extensions;
 using System.Metrics.StatsD;
 using AuthService.Repositories;
-using System;
+using AuthService.Services;
 
 namespace AuthService.Hosting
 {
@@ -25,6 +25,8 @@ namespace AuthService.Hosting
             services.AddLeanMvc();
 
             services.AddSingleton<IAuthProviderRepository>(x => new FileAuthProviderRepository(_env));
+            
+            services.AddTransient<IAccessTokenExchangeService, HttpAccessTokenExchangeService>();
         }
 
         public void ConfigureProductionServices(IServiceCollection services)

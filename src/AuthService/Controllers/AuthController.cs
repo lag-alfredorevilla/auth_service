@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AuthService.Controllers.Models;
 using AuthService.Repositories;
+using AuthService.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthService.Controllers
@@ -13,9 +14,12 @@ namespace AuthService.Controllers
 
         public IAuthProviderRepository ProviderRepository { get; set; }
 
-        public AuthController (IAuthProviderRepository repo)
+        public IAccessTokenExchangeService TokenExchangeService { get; set; }
+
+        public AuthController (IAuthProviderRepository repo, IAccessTokenExchangeService exchange)
         {
             ProviderRepository = repo;
+            TokenExchangeService = exchange;
         }
         
         [HttpGet("providers/")]
@@ -56,14 +60,35 @@ namespace AuthService.Controllers
 
 
         [HttpGet("providers/{id}/callback")]
-        public IActionResult ProcessAuthCallback(string id, [FromQuery] string code, [FromQuery] string error)
+        public IActionResult ProcessAuthCallback([FromRouteAttribute] string id, [FromQuery] string code, [FromQuery] string error)
         {
             if(error != null)
             {
                 return this.Unauthorized();
             }
 
-            return Ok(new AuthResponse { Token = code });
+            try
+            {
+                var provider = ProviderRepository.GetProvider(id);
+
+                if(provider == null)
+                {
+                    return NotFound();
+                }
+
+                var token = TokenExchangeService.ExchangeForToken(provider, code);
+
+                if(token == null)
+                {
+                    return this.Unauthorized();
+                }
+
+                return Ok(new AuthResponse { Token = token.AccessToken });
+            }
+            catch (System.Exception)
+            {
+                return this.Unauthorized();
+            }
         }
     }
 }

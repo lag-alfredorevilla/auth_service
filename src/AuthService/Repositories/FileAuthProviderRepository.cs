@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AuthService.Common.Models;
 using AuthService.Repositories.Models;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
 namespace AuthService.Repositories
@@ -29,11 +29,35 @@ namespace AuthService.Repositories
                     GrantType = x.GrantType,
                     Preferred = x.Preferred,
                     AuthUrl = x.AuthUrl,
+                    TokenUrl = x.TokenUrl,
                     ClientId = x.ClientId,
                     ClientSecret = x.ClientSecret,
                     Scope = x.Scope
                 }
             ).ToArray();
+        }
+        
+        public AuthProviderConfig GetProvider(string identifier)
+        {
+            var candidate = _providers.FirstOrDefault(x => x.Identifier == identifier);
+
+            if(candidate == null)
+            {
+                return null;
+            }
+
+            return new AuthProviderConfig
+            {
+                Identifier = candidate.Identifier,
+                DisplayName = candidate.DisplayName,
+                GrantType = candidate.GrantType,
+                Preferred = candidate.Preferred,
+                AuthUrl = candidate.AuthUrl,
+                TokenUrl = candidate.TokenUrl,
+                ClientId = candidate.ClientId,
+                ClientSecret = candidate.ClientSecret,
+                Scope = candidate.Scope
+            };
         }
     }
 }
