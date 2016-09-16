@@ -1,23 +1,16 @@
 [
-    {
-        "identifier":"google",
-        "displayName":{"de":"Google oAuth2-Anbieter", "en":"Google oAuth2 Provider"},
-        "grantType":"AuthorizationCode",
-        "authUrl":"https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id={CLIENT_ID}&redirect_uri={CALLBACK_URL}&scope={SCOPE}",
-        "tokenUrl":"https://accounts.google.com/o/oauth2/v2/token?code={CODE}&client_id={CLIENT_ID}&client_secret={CLIENT_SECRET}&redirect_uri={REDIRECT_URL}&grant_type=authorization_code",
-        "preferred": true,
-        "clientId":"820785417945-loijgk184ht55mi7mukj4i3mlu9burjs.apps.googleusercontent.com",
-        "clientSecret":"4FcOM1PzDVgCq67_LdSspZ8h",
-        "scope":"profile"
+  {
+    "identifier": "azure_alfredo",
+    "displayName": {
+      "de": "Alfredo Azure Active Directory oAuth2 Anbieter",
+      "en": "Alfredo's Azure Active Directory oAuth2 Provider"
     },
-    {
-        "identifier":"facebook",
-        "displayName":{"de":"Facebook oAuth2-Anbieter", "en":"Facebook oAuth2 Provider"},
-        "grantType":"AuthorizationCode",
-        "authUrl":"https://www.facebook.com/dialog/oauth?client_id={CLIENT_ID}&redirect_uri={redirect-uri}",
-        "preferred": false,
-        "clientId":"820785417945-loijgk184ht55mi7mukj4i3mlu9burjs.apps.googleusercontent.com",
-        "clientSecret":"4FcOM1PzDVgCq67_LdSspZ8h",
-        "scope":"read"
-    }
+    "grantType": "AuthorizationCode",
+    "authUrl": "https://login.microsoftonline.com/alfredorevillaleuchterag.onmicrosoft.com/oauth2/authorize?client_id={CLIENT_ID}&response_type=code&redirect_uri={CALLBACK_URL}&response_mode=query&resource=https://alfredorevillaleuchterag.onmicrosoft.com/AuthService&state={STATE}",
+    "tokenUrl": "https://login.microsoftonline.com/alfredorevillaleuchterag.onmicrosoft.com/oauth2/token",
+    "preferred": true,
+    "clientId": "b70106d5-e416-4e35-be40-afac19df64f0",
+    "clientSecret": "7OTHnR5Dd4gzZxPMi26HKEGEpwSN2uRhcC7SFNpGtDk=",
+    "scope": "user_impersonation"
+  }
 ]

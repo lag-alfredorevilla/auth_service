@@ -5,6 +5,7 @@ using AuthService.Controllers.Models;
 using AuthService.Repositories;
 using AuthService.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace AuthService.Controllers
 {
@@ -16,14 +17,15 @@ namespace AuthService.Controllers
 
         public IAccessTokenExchangeService TokenExchangeService { get; set; }
 
-        public AuthController (IAuthProviderRepository repo, IAccessTokenExchangeService exchange)
+        public AuthController(IAuthProviderRepository repo, IAccessTokenExchangeService exchange)
         {
             ProviderRepository = repo;
             TokenExchangeService = exchange;
         }
-        
+
         [HttpGet("providers/")]
-        public IEnumerable<AuthProviderConfig> GetProviderList() {
+        public IEnumerable<AuthProviderConfig> GetProviderList()
+        {
             var providers = ProviderRepository.GetProviders().Select(
                 x => new AuthProviderConfig
                 {
@@ -41,7 +43,7 @@ namespace AuthService.Controllers
         public AuthRequest GetAuthRequest(string id)
         {
             var provider = ProviderRepository.GetProviders().FirstOrDefault(x => x.Identifier == id);
-            if(provider == null)
+            if (provider == null) 
             {
                 throw new Exception("Not found");
             }
@@ -50,7 +52,9 @@ namespace AuthService.Controllers
             var url = provider.AuthUrl
                 .Replace("{CLIENT_ID}", provider.ClientId)
                 .Replace("{SCOPE}", provider.Scope)
-                .Replace("{CALLBACK_URL}", $"http://www.docugate.ch/auth/providers/{provider.Identifier}/callback");
+                .Replace("{CALLBACK_URL}", $"http://localhost:5000/auth/providers/{provider.Identifier}/callback");
+            //.Replace("{STATE}", new Random(564654564).Next(int.MaxValue).ToString());
+
 
             return new AuthRequest
             {
@@ -58,11 +62,10 @@ namespace AuthService.Controllers
             };
         }
 
-
         [HttpGet("providers/{id}/callback")]
         public IActionResult ProcessAuthCallback([FromRouteAttribute] string id, [FromQuery] string code, [FromQuery] string error)
         {
-            if(error != null)
+            if (error != null)
             {
                 return this.Unauthorized();
             }
@@ -71,23 +74,24 @@ namespace AuthService.Controllers
             {
                 var provider = ProviderRepository.GetProvider(id);
 
-                if(provider == null)
+                if (provider == null)
                 {
                     return NotFound();
                 }
 
                 var token = TokenExchangeService.ExchangeForToken(provider, code);
 
-                if(token == null)
+                if (token == null)
                 {
                     return this.Unauthorized();
                 }
-
-                return Ok(new AuthResponse { Token = token.AccessToken });
+                
+                return Ok(token);
             }
             catch (System.Exception)
             {
-                return this.Unauthorized();
+                //return this.Unauthorized();                
+                throw;
             }
         }
     }

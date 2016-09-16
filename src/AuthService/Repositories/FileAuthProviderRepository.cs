@@ -16,7 +16,7 @@ namespace AuthService.Repositories
         public FileAuthProviderRepository(IHostingEnvironment env)
         {
             Console.WriteLine("Reading from: " + Path.GetDirectoryName(env.ContentRootPath));
-            _providers = JsonConvert.DeserializeObject<IEnumerable<AuthProvider>>(File.ReadAllText(Path.Combine(env.ContentRootPath, "providers.json")));
+            _providers = JsonConvert.DeserializeObject<IEnumerable<AuthProvider>>(File.ReadAllText(Path.Combine(env.ContentRootPath, @"Resources\providers.json")));
         }
 
         public IEnumerable<Common.Models.AuthProviderConfig> GetProviders()
