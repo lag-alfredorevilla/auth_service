@@ -43,7 +43,7 @@ namespace AuthService.Controllers
         public AuthRequest GetAuthRequest(string id)
         {
             var provider = ProviderRepository.GetProviders().FirstOrDefault(x => x.Identifier == id);
-            if (provider == null) 
+            if (provider == null)
             {
                 throw new Exception("Not found");
             }
@@ -53,8 +53,6 @@ namespace AuthService.Controllers
                 .Replace("{CLIENT_ID}", provider.ClientId)
                 .Replace("{SCOPE}", provider.Scope)
                 .Replace("{CALLBACK_URL}", $"http://localhost:5000/auth/providers/{provider.Identifier}/callback");
-            //.Replace("{STATE}", new Random(564654564).Next(int.MaxValue).ToString());
-
 
             return new AuthRequest
             {
@@ -85,13 +83,12 @@ namespace AuthService.Controllers
                 {
                     return this.Unauthorized();
                 }
-                
+
                 return Ok(token);
             }
             catch (System.Exception)
             {
-                //return this.Unauthorized();                
-                throw;
+                return this.Unauthorized();
             }
         }
     }
